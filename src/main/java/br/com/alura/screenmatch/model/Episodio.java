@@ -5,23 +5,25 @@ import java.time.format.DateTimeParseException;
 
 public class Episodio {
     private Integer temporada;
-    private Integer numeroEpisodio;
     private String titulo;
+    private Integer numeroEpisodio;
     private Double avaliacao;
     private LocalDate dataLancamento;
 
     public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio) {
         this.temporada = numeroTemporada;
         this.titulo = dadosEpisodio.titulo();
-        this.numeroEpisodio = dadosEpisodio.numeroEpisodio();
+        this.numeroEpisodio = dadosEpisodio.numero();
+
         try {
             this.avaliacao = Double.valueOf(dadosEpisodio.avaliacao());
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ex) {
             this.avaliacao = 0.0;
         }
+
         try {
             this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
-        }catch (DateTimeParseException e) {
+        } catch (DateTimeParseException ex) {
             this.dataLancamento = null;
         }
     }
@@ -34,20 +36,20 @@ public class Episodio {
         this.temporada = temporada;
     }
 
-    public Integer getNumero() {
-        return numeroEpisodio;
-    }
-
-    public void setNumero(Integer numeroEpisodio) {
-        this.numeroEpisodio = numeroEpisodio;
-    }
-
     public String getTitulo() {
         return titulo;
     }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public Integer getNumeroEpisodio() {
+        return numeroEpisodio;
+    }
+
+    public void setNumeroEpisodio(Integer numeroEpisodio) {
+        this.numeroEpisodio = numeroEpisodio;
     }
 
     public Double getAvaliacao() {
@@ -68,10 +70,10 @@ public class Episodio {
 
     @Override
     public String toString() {
-        return  "temporada=" + temporada +
-                ", numeroEpisodio=" + numeroEpisodio +
+        return "temporada=" + temporada +
                 ", titulo='" + titulo + '\'' +
+                ", numeroEpisodio=" + numeroEpisodio +
                 ", avaliacao=" + avaliacao +
-                ", dataLancamento=" + dataLancamento;
+                ", dataLancamento=" + dataLancamento ;
     }
 }
